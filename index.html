@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator by Guilherme Silva</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+</head>
+
+<body>
+
+    <main>
+        <div class="calculator-box">
+            <div class="calculator">
+                <div class="calculator-title">
+                    <p>Inpiration in Calculator Win11 - v0.1 (Alpha)</p>
+                    <p>by <a href="https://www.linkedin.com/in/gsiilva/" target="_blank">Guilherme Silva</a> <i class="lab la-linkedin-in"></i></p>
+                </div>
+                <div class="calculator-history">
+
+                </div>
+                <div class="calcultor-last-result">
+                    <input type="text" value="" disabled>
+                </div>
+                <div class="calculator-display">
+                    <textarea name="" id="result" disabled></textarea>
+                </div>
+                <div class="calculator-keys">
+                    <div class="calculator-keys-line">
+                        <button id="backspace" class="key-numeric key-button"><i class="las la-backspace"></i></button>
+                        <button id="clearAll" class="key-numeric key-button">CE</button>
+                        <button id="clear" class="key-numeric key-button clear">C</button>
+                        <button value="/" class="key-operation key-button">/</button>
+                    </div>
+                    <div class="calculator-keys-line">
+                        <button value="7" class="key-numeric key-button">7</button>
+                        <button value="8" class="key-numeric key-button">8</button>
+                        <button value="9" class="key-numeric key-button">9</button>
+                        <button value="*" class="key-operation key-button">x</button>
+                    </div>
+                    <div class="calculator-keys-line">
+                        <button value="4" class="key-numeric key-button">4</button>
+                        <button value="5" class="key-numeric key-button">5</button>
+                        <button value="6" class="key-numeric key-button">6</button>
+                        <button value="-" class="key-operation key-button">-</button>
+                    </div>
+                    <div class="calculator-keys-line">
+                        <button value="1" class="key-numeric key-button">1</button>
+                        <button value="2" class="key-numeric key-button">2</button>
+                        <button value="3" class="key-numeric key-button">3</button>
+                        <button value="+" class="key-operation key-button">+</button>
+                    </div>
+                    <div class="calculator-keys-line">
+                        <button class="key-numeric key-button-disable key-button"></button>
+                        <button value="0" class="key-numeric key-button">0</button>
+                        <button value="." class="key-numeric key-button">.</button>
+                        <button id="equal" class="key-button">=</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            var valueInput;
+            var valueOperation;
+
+            $('.key-numeric').click(function() {
+                valueInput = $(this).val();
+                $('textarea').val($('textarea').val() + valueInput);
+            });
+
+            $('.key-operation').click(function() {
+                valueOperation = $(this).val();
+                valueTemporary = $('textarea').val() + valueOperation;
+                $('textarea').val(valueTemporary);
+            });
+
+            $('#equal').click(function() {
+                var x = $('textarea').val();
+                var y = eval($('textarea').val());
+
+                if (Number.isInteger(y)) {
+                    $('.calcultor-last-result input').val(x + ' = ' + y);
+                    $('textarea').val('');
+                } else {
+                    $('.calcultor-last-result input').val(x + ' = ' + parseFloat(y).toFixed(2));
+                    $('textarea').val('');
+                }
+            });
+
+            $('#clear').click(function() {
+                $('textarea').val('');
+            });
+
+            $('#clearAll').click(function() {
+                $('.calcultor-last-result input').val('');
+                $('textarea').val('');
+            });
+
+            $('#backspace').click(function() {
+                $('textarea').val($('textarea').val().substring(0, $('textarea').val().length - 1));
+            });
+        });
+    </script>
+
+</body>
+
+</html>
